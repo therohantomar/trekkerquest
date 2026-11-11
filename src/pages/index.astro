@@ -1,11 +1,376 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import { treks, regions } from "../data/treks";
+import TrailSlider from "../components/TrailSlider";
+const featured = treks.slice(0, 3);
 ---
 
 <Layout>
-	<Welcome />
+  <section class="home-hero">
+    <div class="hero-copy">
+      <span class="eyebrow">INDIA, ONE TRAIL AT A TIME</span>
+      <h1>
+        Find your trail.
+        <br />
+        <em>Live your quest.</em>
+      </h1>
+      <p>
+        From Himalayan horizons to the wild Sahyadris, discover trekking
+        landscapes across India—and find the kind of journey that feels like
+        yours.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="/treks/">
+          Explore treks <span>↗</span>
+        </a>
+        <a class="button button-outline" href="/destinations/">
+          Explore destinations
+        </a>
+      </div>
+      <form class="hero-search" action="/treks/" method="get">
+        <label for="q">Where would you like to wander?</label>
+        <div>
+          <input
+            id="q"
+            name="q"
+            placeholder="Try Maharashtra, forest, Himalayas…"
+          />
+          <button class="button" type="submit" aria-label="Search treks">
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+    <div
+      class="hero-image"
+      role="img"
+      aria-label="Mountain ridges fading into the distance"
+    ></div>
+    <span class="image-note">
+      Illustrative landscape · not a TrekkersQuest trip photograph
+    </span>
+  </section>
+  <section class="trust-strip">
+    <span>Clear trail information</span>
+    <i></i>
+    <span>Preparation-first guidance</span>
+    <i></i>
+    <span>India-only discovery</span>
+    <i></i>
+    <span>Transparent enquiries</span>
+  </section>
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">THE LANDSCAPE IS YOURS TO CHOOSE</span>
+      <h2>Every landscape has a story.</h2>
+      <p>
+        Find yours among mountain passes, forest paths, valley trails and
+        historic hill forts.
+      </p>
+    </div>
+    <TrailSlider client:visible />
+    <div class="region-grid">
+      {regions.map((r) => (
+        <a
+          class="region-card"
+          href={`/destinations/${r.slug}/`}
+          style={`background-image:url('${r.image}')`}
+        >
+          <h3>{r.name}</h3>
+          <p>{r.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="section featured-section">
+    <div class="section-head">
+      <span class="eyebrow">START EXPLORING</span>
+      <h2>Trails worth getting to know.</h2>
+      <p>
+        These discovery listings are sample content. Route facts, access, season
+        and difficulty need confirmation before a trip is planned.
+      </p>
+    </div>
+    <div class="card-grid">
+      {featured.map((t) => (
+        <article class="trek-card">
+          <img
+            src={t.image}
+            alt={`Illustrative landscape for ${t.name}`}
+            loading="lazy"
+          />
+          <div class="trek-card-body">
+            <span class="eyebrow">{t.state} · SAMPLE</span>
+            <h3>{t.name}</h3>
+            <p>{t.description}</p>
+            <a class="text-link" href={`/treks/${t.slug}/`}>
+              View trek details ↗
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p style="margin-top:26px">
+      <a class="text-link" href="/treks/">
+        Browse all discovery trails →
+      </a>
+    </p>
+  </section>
+  <section class="split-section">
+    <div>
+      <span class="eyebrow">A GOOD JOURNEY STARTS BEFORE THE TRAIL</span>
+      <h2>
+        Choose with clarity.
+        <br />
+        Prepare with care.
+      </h2>
+      <p>
+        Difficulty labels mean little without context. We’re building a better
+        way to understand terrain, fitness, season and the details worth
+        checking before you go.
+      </p>
+      <a class="button" href="/blog/">
+        Read the trail journal
+      </a>
+    </div>
+    <div class="principles">
+      <div>
+        <span>01</span>
+        <h3>Know the route</h3>
+        <p>
+          Look for the facts that matter—and spot what still needs checking.
+        </p>
+      </div>
+      <div>
+        <span>02</span>
+        <h3>Match your pace</h3>
+        <p>Think about experience, fitness, terrain and the time you have.</p>
+      </div>
+      <div>
+        <span>03</span>
+        <h3>Leave it better</h3>
+        <p>Respect local guidance, communities and the places you explore.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section city-section">
+    <div class="section-head">
+      <span class="eyebrow">WEEKEND POSSIBILITIES</span>
+      <h2>Start where you are.</h2>
+      <p>
+        Explore city gateway discovery pages. Specific transport and
+        meeting-point details are not yet verified.
+      </p>
+    </div>
+    <div class="city-links">
+      <a href="/treks-near-mumbai/">
+        Mumbai <span>↗</span>
+      </a>
+      <a href="/treks-near-pune/">
+        Pune <span>↗</span>
+      </a>
+      <a href="/treks-near-bengaluru/">
+        Bengaluru <span>↗</span>
+      </a>
+      <a href="/weekend-treks/">
+        All weekend trails <span>↗</span>
+      </a>
+    </div>
+  </section>
 </Layout>
+<style>
+  .home-hero {
+    min-height: 690px;
+    background: var(--forest);
+    color: white;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-copy {
+    width: min(68%, 900px);
+    padding: 105px 30px 90px clamp(22px, 8vw, 120px);
+    position: relative;
+    z-index: 1;
+  }
+  .home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(12, 48, 32, 0.94) 0%,
+      rgba(17, 61, 40, 0.82) 42%,
+      rgba(17, 61, 40, 0.08) 100%
+    );
+    pointer-events: none;
+  }
+  .hero-copy .eyebrow {
+    color: #c7d8ca;
+  }
+  .hero-copy h1 {
+    font-size: clamp(48px, 6vw, 78px);
+    margin: 17px 0 20px;
+  }
+  .hero-copy h1 em {
+    font-style: normal;
+    color: var(--gold-200);
+  }
+  .hero-copy > p {
+    color: #d1ded5;
+    max-width: 470px;
+    font-size: 16px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    margin: 28px 0 30px;
+  }
+  .hero-search {
+    margin-top: 24px;
+    max-width: 480px;
+  }
+  .hero-search label {
+    font-size: 12px;
+    color: #c8d7ce;
+  }
+  .hero-search > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    background: white;
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.58);
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(7, 32, 20, 0.22);
+  }
+  .hero-search input {
+    border: 0;
+    min-width: 0;
+    min-height: 48px;
+    flex: 1;
+    padding: 8px 15px;
+    outline: none;
+    background: transparent;
+    color: var(--ink);
+    font: 400 14px var(--serif);
+  }
+  .hero-search input::placeholder {
+    color: #87978a;
+  }
+  .hero-search .button {
+    min-height: 48px;
+    padding-inline: 22px;
+  }
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background: url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=90")
+      center 48% / cover;
+    transform: scale(1.02);
+  }
+  .image-note {
+    position: absolute;
+    bottom: 12px;
+    right: 22px;
+    font-size: 10px;
+    color: white;
+    text-shadow: 0 1px 4px #000;
+  }
+  .trust-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+    background: var(--pine-50);
+    color: var(--pine-900);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .trust-strip i {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+  .featured-section {
+    background: #f1f8ef;
+  }
+  .split-section {
+    background: var(--forest);
+    color: white;
+    padding: 80px clamp(22px, 8vw, 120px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+  }
+  .split-section p {
+    color: #deebdf;
+  }
+  .principles > div {
+    border-bottom: 1px solid #537061;
+    padding: 0 0 15px;
+    margin-bottom: 16px;
+  }
+  .principles span {
+    color: #e9aa7e;
+    font-size: 12px;
+  }
+  .principles h3 {
+    margin: 4px 0;
+    font-size: 20px;
+  }
+  .city-section {
+    padding-bottom: 100px;
+  }
+  .city-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+  }
+  .city-links a {
+    padding: 22px 15px;
+    border-bottom: 1px solid var(--line);
+    font: 700 17px var(--serif);
+    display: flex;
+    justify-content: space-between;
+  }
+  .city-links a:hover {
+    color: var(--pine);
+  }
+  @media (max-width: 850px) {
+    .home-hero {
+      min-height: 680px;
+    }
+    .home-hero::before {
+      background:
+        linear-gradient(90deg, rgba(12, 48, 32, 0.89), rgba(17, 61, 40, 0.45)),
+        linear-gradient(0deg, rgba(12, 48, 32, 0.4), transparent 60%);
+    }
+    .hero-copy {
+      width: 100%;
+      padding: 88px 22px 76px;
+    }
+    .trust-strip {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .split-section {
+      grid-template-columns: 1fr;
+    }
+    .city-links {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 500px) {
+    .hero-actions {
+      flex-wrap: wrap;
+    }
+    .city-links {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
