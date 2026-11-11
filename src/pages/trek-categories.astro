@@ -1,0 +1,4 @@
+---
+import Layout from '../layouts/Layout.astro';import {treks} from '../data/treks';const types=[...new Set(treks.flatMap(t=>t.trekType))];
+---
+<Layout title="Trek Categories | TrekkersQuest"><section class="page-hero"><span class="eyebrow">FIND YOUR KIND OF OUTDOORS</span><h1>Explore by experience.</h1><p>Browse landscape and trail types across India. Sample labels are intended for discovery and are not difficulty guidance.</p></section><section class="section"><div class="city-links">{types.map(type=><a href={`/treks/?q=${encodeURIComponent(type)}`}>{type} trails ↗</a>)}</div></section></Layout>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" role="img" aria-label="Trekker’s Quest mountain compass mark">
+  <g fill="none" stroke="#EDA525" stroke-width="8" stroke-linecap="butt">
+    <path d="M148 46.9A96 96 0 0 1 194.5 113.3" />
+    <path d="M52 46.9A96 96 0 0 0 5.5 113.3" />
+  </g>
+  <path fill="#EDA525" d="M0-120 10-97H-10Z" transform="translate(100 130) rotate(55)" />
+  <path fill="#EDA525" d="M0-120 10-97H-10Z" transform="translate(100 130) rotate(-55)" />
+  <path fill="none" stroke="#8F0A0B" stroke-width="10" d="M22 130a78 78 0 0 1 156 0" />
+  <path fill="#8F0A0B" d="m100 2 14 50H86Z M0 135l30-15v15Zm200 0-30-15v15Z" />
+  <path fill="#8F0A0B" d="M30 130h140v5H30z" />
+  <path fill="#9A722A" d="m44 130 38-44 14 14 16-34 26 38 12-10 10 36Z" />
+  <path fill="#6F5019" d="m112 66 26 38 12-10 10 36h-48Z" />
+  <path fill="#fff" d="m112 66 10 15-6-3-4 7-5-6-2 2Z" />
+  <path fill="#275123" d="m44 130 26-22 14 12 12-8 14 18Zm82 0 16-18 10 10 8 8Z" />
+</svg>

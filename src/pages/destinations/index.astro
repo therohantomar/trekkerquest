@@ -1,0 +1,4 @@
+---
+import Layout from '../../layouts/Layout.astro';import {regions,treks} from '../../data/treks';
+---
+<Layout title="Trekking Destinations in India | TrekkersQuest"><section class="page-hero"><span class="eyebrow">INDIA, IN MANY LANDSCAPES</span><h1>Explore destinations.</h1><p>Discover landscape-led categories across India. A destination is an invitation to explore, not a claim of current route availability.</p></section><section class="section"><div class="region-grid">{regions.map(r=><a class="region-card" href={`/destinations/${r.slug}/`} style={`background-image:url('${r.image}')`}><h3>{r.name}</h3><p>{treks.filter(t=>t.region===r.name).length} sample discovery {treks.filter(t=>t.region===r.name).length===1?'trail':'trails'}</p></a>)}</div><p class="notice" style="margin-top:30px">Please verify current route access, local rules, weather and permits before travel.</p></section></Layout>
