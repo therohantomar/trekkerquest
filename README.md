@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# TrekkersQuest
+
+India-only trekking discovery website built with Astro. Current trek and editorial records are explicitly demo/sample content; the site does not sell trips, confirm availability or submit real enquiries.
+
+## Development
+
+Requires Node.js `>=22.23.4` and pnpm.
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Project guidance requests background server mode when launching with the Astro CLI: `astro dev --background`. Manage it with `astro dev status`, `astro dev logs`, and `astro dev stop`.
 
-## 🚀 Project Structure
+## Build and preview
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+pnpm build
+pnpm preview
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Content editing
 
-## 🧞 Commands
+- Edit typed sample trek records in `src/data/treks.ts`. Every trek must remain `country: 'India'`; keep the `draft` status until the owner verifies details.
+- Do not add altitude, distance, duration, season, difficulty, prices, availability or departures without source verification.
+- Images currently use replaceable Unsplash URLs as illustrative landscapes, not TrekkersQuest trip photographs. Replace with properly licensed, locally hosted assets and accurate alt text before launch.
+- Blog content is demo editorial guidance. Safety, permits, weather and access information needs current authoritative review.
+- The contact and enquiry forms operate in demo mode only and explicitly do not send data. Integrate a server-side endpoint in a replaceable service before collecting messages.
+- Replace the `example.com` URLs in `public/sitemap.xml` with the production canonical domain and add all published pages before launch.
+- Policy routes are draft templates. The business must provide and legally review final privacy, terms and cancellation text.
+- Add real business contact information, verified trip information, actual data sources and operator information as appropriate. Do not add social proof unless documented.
 
-All commands are run from the root of the project, from a terminal:
+## Styling and motion
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+The site uses shared responsive design tokens in `src/layouts/Layout.astro`, with Urbanist for display headings, Plus Jakarta Sans for UI, Poppins for the brand wordmark, and Literata for reading text—all self-hosted via Fontsource. Brand colors and control variants follow the supplied Trekker’s Quest design-system HTML. The mountain-compass logo is served from `public/trekkers-quest-mark.svg` and used in the header, footer, and favicon. AOS provides scroll-triggered reveals across page content; initial viewport elements remain static, and reduced-motion preferences disable AOS. The landscape slider is a React island using Framer Motion and honors reduced-motion preferences. Iconify icons are rendered with the `iconify-icon` web component.
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Tailwind is not installed in this starter; shared CSS is used instead to avoid bringing in a framework that the existing project did not have.
+# trekkerquest
